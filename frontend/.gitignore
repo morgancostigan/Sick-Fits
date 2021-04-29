@@ -1,4 +1,4 @@
 .env
 public
-nodemodules
+node_modules
 .cache
