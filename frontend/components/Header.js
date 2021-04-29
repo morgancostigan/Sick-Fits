@@ -29,7 +29,7 @@ const HeaderStyles = styled.header`
     .sub-bar {
         display: grid;
         grid-template-columns: auto 1fr;
-        border-bottom: 1 px solid var(--black, black);
+        border-bottom: 1px solid var(--black, black);
 
     }
 `;
