@@ -1,5 +1,7 @@
+import Page from '../components/Page';
+
 export default function OrderPage() {
-    return <div>
+    return <Page>
         <p>Order Page</p>
-    </div>
+    </Page>
 }
