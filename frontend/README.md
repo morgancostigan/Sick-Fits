@@ -4,5 +4,6 @@ Sick Fits Frontend
 # Next.js
 # Apollo Client
 # Styled Components
+# NProgress
 
 
