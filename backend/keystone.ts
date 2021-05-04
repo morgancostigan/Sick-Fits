@@ -1,5 +1,8 @@
+import { User } from './schemas/User';
+import { createAuth } from '@keystone-next/auth';
 import 'dotenv/config';
 import { config, createSchema } from '@keystone-next/keystone/schema';
+import { withItemData, statelessSessions } from '@keystone-next/keystone/session';
 
 const databaseURL = process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
 
@@ -8,7 +11,17 @@ const sessionConfig = {
     secret: process.env.COOKIE_SECRET,
 };
 
-export default config({
+const { withAuth } = createAuth({
+    listKey: 'User',
+    identityField: 'email',
+    secretField: 'password',
+    initFirstItem: {
+        fields: ['name', 'email', 'password']
+        //TODO add roles
+    }
+});
+
+export default withAuth(config({
     server: {
         cors: {
             origin: [process.env.FRONTEND_URL],
@@ -22,10 +35,17 @@ export default config({
     },
     lists: createSchema({
         //schema items go here
+        User
     }),
     ui: {
-        //TODO change this later for roles
-        isAccessAllowed: () => true,
+        //show UI only to users who get past this
+        isAccessAllowed: ({ session }) => {
+            // console.log({session});
+            return !!session?.data;
+        },
     },
-    //TODO Add session values here
-});
+    session: withItemData(statelessSessions(sessionConfig),{
+        //graphQL 
+        User: 'id',
+    }),
+}));
