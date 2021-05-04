@@ -25,7 +25,7 @@ export const Product= list({
                 },
             },
         }),
-        price: integer();
+        price: integer(),
         //TODO photo
     },
 });
