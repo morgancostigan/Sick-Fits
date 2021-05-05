@@ -2,6 +2,7 @@ import ItemStyles from '../components/styles/ItemStyles';
 import Title from '../components/styles/Title';
 import PriceTag from '../components/styles/PriceTag';
 import Link from 'next/link';
+import formatMoney from '../lib/formatMoney';
 
 export default function Product({ product }) {
     return (
@@ -13,7 +14,7 @@ export default function Product({ product }) {
             <Title>
                 <Link href={`/product/${product.id}`}>{product.name}</Link>
             </Title>
-            <PriceTag>{product.price}</PriceTag>
+            <PriceTag>{formatMoney(product.price)}</PriceTag>
 
         
         
