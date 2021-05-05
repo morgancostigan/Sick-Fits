@@ -4,8 +4,5 @@
   "/_error": "pages/_error.js",
   "/orders": "pages/orders.js",
   "/account": "pages/account.js",
-  "/products": "pages/products.js",
-  "/": "pages/index.js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
-  "/sell": "pages/sell.js"
+  "/": "pages/index.js"
 }
