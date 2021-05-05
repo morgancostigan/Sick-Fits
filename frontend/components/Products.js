@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
+import Product from '../components/Product';
 
 const ALL_PRODUCTS_QUERY = gql`
     query ALL_PRODUCTS_QUERY {
@@ -27,14 +28,14 @@ const ProductListStyles = styled.div`
 
 export default function Products() {
     const {data, error, loading} = useQuery(ALL_PRODUCTS_QUERY);
-    console.log({data}, {error}, {loading});
+    console.log("Loading Products Page", {data}, {error}, {loading});
     if (loading) return <p>Wait for it... wait for it...</p>;
     if (error) return <p>Error: {error.message}</p>;
     return (
         <div>
             <ProductListStyles>
                 {data.allProducts.map((product) => (
-                    <p key={product.id}>{product.name}</p>
+                    <Product key={product.id} product={product}/>
                 ))}
             </ProductListStyles>
         </div>
