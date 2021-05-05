@@ -25,7 +25,11 @@ export default function Products() {
     if (error) return <p>Error: {error.message}</p>;
     return (
         <div>
-            <p>Productos</p>
+            <div>
+                {data.allProducts.map((product) => (
+                    <p key={product.id}>{product.name}</p>
+                ))}
+            </div>
         </div>
     )
 }; 
