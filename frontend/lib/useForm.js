@@ -9,6 +9,13 @@ export default function useForm(initial = {}) {
             //copy existing state
             ...inputs,
             [e.target.name]: e.target.value,
-        })
-    }
-}
+        });
+    };
+
+    //return the things we want surfaced 
+    return {
+        inputs,
+        handleChange,
+    };
+
+};
