@@ -22,7 +22,7 @@ export default function CreateProduct() {
             <label htmlFor="price">
                 Price
                 <input
-                    type="price"
+                    type="number"
                     id="price"
                     name="price"
                     placeholder="Price"
