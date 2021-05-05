@@ -8,7 +8,11 @@ export default function useForm(initial = {}) {
         let { value, name, type } = e.target;
         if(type === 'number'){
             value = parseInt(value);
-        };
+        }
+        //vvv this is for file uploads vvv
+        if(type === 'file'){
+            value[0] = e.target.files;
+        }
         setInputs({
             //copy existing state
             ...inputs,
@@ -16,10 +20,22 @@ export default function useForm(initial = {}) {
         });
     };
 
+    function resetForm(){
+        setInputs(initial)
+    }
+
+    function clearForm() {
+        const blankState = Object.fromEntries(Object.entries(inputs)
+            .map(([key, value]) => [key, '']));
+        setInputs(blankState);
+    }
+
     //return the things we want surfaced 
     return {
         inputs,
         handleChange,
+        resetForm,
+        clearForm,
     };
 
 };
