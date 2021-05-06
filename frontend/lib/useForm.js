@@ -11,8 +11,9 @@ export default function useForm(initial = {}) {
         }
         //vvv this is for file uploads vvv
         if(type === 'file'){
-            value = e.target.files;
+            [value] = e.target.files;
         }
+        
         setInputs({
             //copy existing state
             ...inputs,

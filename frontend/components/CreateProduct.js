@@ -3,17 +3,22 @@ import Form from './styles/Form';
 
 export default function CreateProduct() {
     const {inputs, handleChange, clearForm, resetForm} = useForm({
-        name: 'Name It!',
-        price: 0,
-        description: 'Describe It!',
-        bop: 'Bop It!',
+        image: '',
+        name: '',
+        price: '',
+        description: '',
     });
     return (
-        <Form>
+        <Form onSubmit={(e) => {
+            e.preventDefault();
+            console.log({inputs});
+            
+        }}>
             <fieldset >
                 <label htmlFor="image">
                     Image
                     <input
+                        required 
                         type="file"
                         id="image"
                         name="image"
@@ -21,7 +26,7 @@ export default function CreateProduct() {
                     />
                 </label>
                 <label htmlFor="name">
-                    Name
+                    Name It!
                     <input
                         type="text"
                         id="name"
@@ -32,7 +37,7 @@ export default function CreateProduct() {
                     />
                 </label>
                 <label htmlFor="price">
-                    Price
+                    Price It!
                     <input
                         type="number"
                         id="price"
@@ -43,9 +48,8 @@ export default function CreateProduct() {
                     />
                 </label>
                 <label htmlFor="description">
-                    Description
-                    <input
-                        type="description"
+                    Describe It!
+                    <textarea
                         id="description"
                         name="description"
                         placeholder="Description"
@@ -53,6 +57,9 @@ export default function CreateProduct() {
                         onChange={handleChange}
                     />
                 </label> 
+                <label>
+                    Bop It!
+                </label>
                 <button type="submit">+ Add Product</button>
             </fieldset>
 
