@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default function SingleProduct() {}","map":{"version":3,"sources":["/Users/macbookpro/Documents/Tier-4/Advanced-React-master redux/sick-fits/frontend/pages/product/[id].js"],"names":["SingleProduct"],"mappings":"AAAA,eAAe,SAASA,aAAT,GAAyB,CAEvC","sourcesContent":["export default function SingleProduct() {\n    \n}"]},"metadata":{},"sourceType":"module"}
