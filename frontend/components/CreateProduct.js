@@ -16,11 +16,12 @@ const CREATE_PRODUCT_MUTATION = gql`
             name: $name
             price: $price
             description: $description
-            status: "available"
+            # AVAILABLE MUST BE ALL CAPS TO WORK
+            status: "AVAILABLE"
             photo: {
                 create: {
                     image: $image
-                    alttext: $name
+                    altText: $name
                 }
             }
         }){
@@ -28,7 +29,6 @@ const CREATE_PRODUCT_MUTATION = gql`
             description
             price
             name
-            photo
         }
     }
 `;
@@ -50,11 +50,9 @@ export default function CreateProduct() {
             console.log({inputs});
             //submit input fields to backend
             const res = await createProduct();
-            console.log({res});
-            
-            
+            clearForm();
         }}>
-            <DisplayError />
+            <DisplayError error={error}/>
             <fieldset disabled={loading} aria-busy={loading}>
                 <label htmlFor="image">
                     Image
