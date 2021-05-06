@@ -1,6 +1,7 @@
 import gql from "graphql-tag";
 import { useQuery } from '@apollo/client';
 import DisplayError from '../components/ErrorMessage';
+import Head from 'next/head';
 
 const SINGLE_ITEM_QUERY = gql`
     query SINGLE_ITEM_QUERY($id: ID!) {
@@ -8,11 +9,13 @@ const SINGLE_ITEM_QUERY = gql`
             id: $id
         }) 
         {
+            id
             name
             price
             description
             photo {
                 id
+                altText
                 image {
                     publicUrlTransformed
                 }
@@ -27,8 +30,21 @@ export default function SingleProduct({ id }) {
     });
     if(loading) return <p>Wait for it... Wait for it...</p>;
     if(error) return <DisplayError error={error}/>;
+    const { Product } = data;
     console.log({ data, loading, error });
-    return <div>
-        <h2>{data.Product.name}</h2>
-    </div>
+    return (
+        <div>
+            <Head>
+                <title>Sick Fits | {Product.name}</title>
+            </Head>
+            <img 
+                src={Product.photo.image.publicUrlTransformed} 
+                alt={Product.photo.altText} 
+            />
+            <div className="details">
+                <h2>{Product.name}</h2>
+                <p>{Product.description}</p>
+            </div>
+        </div>
+    )
 }
