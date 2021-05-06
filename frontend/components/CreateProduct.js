@@ -1,5 +1,35 @@
+import gql from "graphql-tag";
 import useForm from "../lib/useForm";
 import Form from './styles/Form';
+
+const CREATE_PRODUCT_MUTATION = gql`
+    mutation CREATE_PRODUCT_MUTATION(
+        # which variables (and their types) are passed in?
+        $name: String!
+        $description: String!
+        $price: Int!
+        $image: Upload
+    ) {
+        createProduct (data:{
+            name: $name
+            price: $price
+            description: $description
+            status: "available"
+            photo: {
+                create: {
+                    image: $image
+                    alttext: $name
+                }
+            }
+        }){
+            id
+            description
+            price
+            name
+            photo
+        }
+    }
+`;
 
 export default function CreateProduct() {
     const {inputs, handleChange, clearForm, resetForm} = useForm({
