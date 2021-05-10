@@ -21,6 +21,30 @@ const SINGLE_ITEM_QUERY = gql`
         }
     }
 `;
+
+const UPDATE_PRODUCT_MUTATION = gql`
+    mutation UPDATE_PRODUCT_MUTATION(
+        $id: ID!
+        $name: String
+        $description: String
+        $price: Int
+    ) {
+        updateProduct (
+            id: $id,
+            data: {
+                id: $id,
+                name: $name,
+                description: $description,
+                price: $price,
+            }
+        ) {
+            id
+            name
+            description
+            price
+        }
+    }
+`;
  
 
 export default function UpdateProduct({id}) {
