@@ -57,7 +57,7 @@ export default function UpdateProduct({id}) {
     const { data, error, loading } = useQuery(SINGLE_ITEM_QUERY, {
         variables: {id},
     });
-    console.log({data});
+    if(loading) return <p>Loading...</p>    
     
     //mutation to update, including renaming res variables to not conflict with above
     const [updateProduct, { 
@@ -71,12 +71,7 @@ export default function UpdateProduct({id}) {
             }
         })
     //create state for form inputs 
-    const { inputs, handleChange, clearForm, resetForm } = useForm({
-        image: '',
-        name: '',
-        price: '',
-        description: '',
-    });
+    const { inputs, handleChange, clearForm, resetForm } = useForm(data.Product);
     //form to handle updates
 
     return (

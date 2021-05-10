@@ -4,5 +4,5 @@
   "/_error": "pages/_error.js",
   "/product/[id]": "pages/product/[id].js",
   "/update": "pages/update.js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js"
+  "/": "pages/index.js"
 }
