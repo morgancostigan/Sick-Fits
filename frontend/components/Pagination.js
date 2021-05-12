@@ -8,6 +8,7 @@ export default function Pagination({ page }) {
             <Head>
                 <title>Sick Fits - Page {page} of ___</title>
             </Head>
+            <p>Pagination</p>
         </PaginationStyles>
     );
 };
