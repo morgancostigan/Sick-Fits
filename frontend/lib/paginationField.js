@@ -10,7 +10,8 @@ export default function paginationField() {
             //read # of items on page from cache
             const data = cache.readQuery({ query: PAGINATION_QUERY });
             const count = data?._allProductsMeta?.count;
-
+            const page = skip / first + 1;
+            const pages = Math.ceil(count / first);
             
 
             //we can do 1 of 2 things...
