@@ -12,6 +12,20 @@ export default function paginationField() {
             const count = data?._allProductsMeta?.count;
             const page = skip / first + 1;
             const pages = Math.ceil(count / first);
+            // check if there are existing items in cache, and filter out undefined items
+            const items = existing.slice(skip, skip + first).filter((x) => x);
+            //if no items...
+            if(items.length !== first) {
+                // tell Apollo we have nuthin and to fetch items from network
+                return false;
+            };
+            //if there are items in cache, skip the network request and return from cache
+            if(items.length) {
+                console.log(`the cache already has ${items.length} items`);
+                return items;  
+            };
+            // if both IFs don't work... fall back to network request
+            return false;
             
 
             //we can do 1 of 2 things...
