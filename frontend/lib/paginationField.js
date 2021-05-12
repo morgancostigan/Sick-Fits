@@ -14,6 +14,10 @@ export default function paginationField() {
             const pages = Math.ceil(count / first);
             // check if there are existing items in cache, and filter out undefined items
             const items = existing.slice(skip, skip + first).filter((x) => x);
+            //if there are items, but not as many as the `first` value, and we are on the last page, send partial page anyway  
+            if(items.length && items.length !== first && page = pages) {
+                return items;
+            };
             //if no items...
             if(items.length !== first) {
                 // tell Apollo we have nuthin and to fetch items from network
@@ -41,7 +45,7 @@ export default function paginationField() {
             //if anything in the cache, merged is the existing, otherwise it's an empty array
             const merged = existing ? existing.slice(0) : [];
             //leave room for previous items, in case we are linked to a later page and the previous entries aren't in the cache
-            for (let i = skip; i < skip + incoming.length; ++i) {
+            for (let i = skip; i <  skip + incoming.length; ++i) {
                 merged[i] = incoming [i - skip]
             };
             console.log({merged});
