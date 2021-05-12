@@ -32,9 +32,23 @@ export default function paginationField() {
             // 1. return the items that are already in cache
             // or 2. return 'false' triggering a network request for the items
         },
-        merge() {
+        merge(existing, incoming, {args}) {
+            //grab skip and first values
+            const { skip, first } = args;
             // this runs when Apollo brings data back from the network request
-
+            console.log(`merging items from network ${incoming.length}`);
+            // console.log({incoming});
+            //if anything in the cache, merged is the existing, otherwise it's an empty array
+            const merged = existing ? existing.slice(0) : [];
+            //leave room for previous items, in case we are linked to a later page and the previous entries aren't in the cache
+            for (let i = skip; i < skip + incoming.length; ++i) {
+                merged[i] = incoming [i - skip]
+            };
+            console.log({merged});
+            //return merged itemd from cache, which automatically refires read fucntion
+            return merged;
+            
+            
         }
     };
 };
