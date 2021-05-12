@@ -22,8 +22,7 @@ export default function Pagination({ page }) {
     if(error) return <DisplayError error={error}/>
     // console.log({data});
     const { count } = data._allProductsMeta;
-    const totalPages = Math.ceil(count / perPage)
-    const currentPage = 
+    const totalPages = Math.ceil(count / perPage);
     
     return (
         <PaginationStyles>
@@ -33,10 +32,18 @@ export default function Pagination({ page }) {
             {/* Link to previous
             Link to next 
             Total pages */}
-            <Link href="/">◀️ Prev</Link>
-            <p>Page __ of {totalPages}</p>
+            <Link href={`/products/${page - 1}`}>
+                <a aria-disabled={page <= 1}>
+                    ◀️ Prev
+                </a>
+            </Link>
+            <p>Page {page} of {totalPages}</p>
             <p>{count} Total Items</p>
-            <Link href="/">Next ▶️</Link>
+            <Link href={`/products/${page + 1}`}>
+                <a aria-disabled={page >= totalPages}>
+                    Next ▶️
+                </a>
+            </Link>
         </PaginationStyles>
     );
 };
