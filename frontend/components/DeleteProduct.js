@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 
 const DELETE_PRODUCT_MUTATION = gql`
     mutation DELETE_PRODUCT_MUTATION($id: ID!) {
-        deleteProduct($id) {
+        deleteProduct(id: $id) {
             id
             name
         }
@@ -16,7 +16,10 @@ export default function DeleteProduct({id, children}) {
             variables: { id },
         }
     );
-    return <button type="button" onClick={() => {
+    return <button 
+            type="button"  
+            disabled={loading}
+            onClick={() => {
         if(confirm('Should we really remove this item from existence?')) {
             //if confirmed, THEN delete
             console.log('gettin it gone!');
