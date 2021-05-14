@@ -9,15 +9,16 @@ export default function Nav() {
     return (
         <NavStyles>
             <Link href="/products">Products</Link>
-            {
-                user && (
-                    <>
+            {/* if signed in */}
+            { user && ( <>
                         <Link href="/sell">Sell</Link>
                         <Link href="/orders">Orders</Link>
                         <Link href="/account">Account</Link>
-                    </>
-                )
-            }
+            </> )};
+            {/* if not signed in */}
+            { !user && ( <>
+                <Link href="/signin">Sign In</Link>
+            </> )};
         </NavStyles>
     );
 } 
