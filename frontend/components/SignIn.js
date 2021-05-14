@@ -1,6 +1,19 @@
 import Form from './styles/Form';
 import useForm from "../lib/useForm";
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
+import gql from 'graphql-tag';
+
+const SIGN_IN_MUTATION = gql`
+    mutation SIGN_IN_MUTATION(email: String!, password: String!) {
+        ... on UserAuthenticationWithPasswordSuccess {
+            item {
+                id
+                name
+                email
+            }
+        }
+    }
+`;
 
 
 export default function SignIn() {
@@ -9,26 +22,24 @@ export default function SignIn() {
         email: '',
         password: '',
     });
-    const [createProduct, { loading, error, data }] = useQuery(CREATE_PRODUCT_MUTATION, {
-        variables: inputs,
-        refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
-    });
+    // const [createProduct, { loading, error, data }] = useMutation(SIGN_IN_MUTATION, {
+    //     variables: inputs,
+    // });
+
+    function handleSubmit(e){
+        e.preventDefault(); //stop form from submitting early
+        //send email and password to graphQL API
+
+    };
 
     return (
         //method POST to prevent password from showing in URL, history, and logs
-        <Form method="post" onSubmit={async (e) => {
-            e.preventDefault();
-            // console.log({inputs});
-            //submit input fields to backend
-            const res = await createProduct();
-            clearForm();
-            //Go to the new product's page
-            Router.push({
-                pathname: `/product/${res.data.createProduct.id}`,
-            })
-        }}>
-            <DisplayError error={error} />
-            <fieldset disabled={loading} aria-busy={loading}>
+        <Form method="post" onSubmit={handleSubmit}>
+            {/* <DisplayError error={error} /> */}
+            <h2>Go Ahead And Sign On In</h2>
+            {/* <fieldset disabled={loading} aria-busy={loading}> */}
+            <fieldset>
+
                 <label htmlFor="email">
                     Email
                     <input
