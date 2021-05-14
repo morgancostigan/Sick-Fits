@@ -5,17 +5,22 @@ import gql from 'graphql-tag';
 import { CURRENT_USER_QUERY } from './User';
 
 const SIGN_IN_MUTATION = gql`
-    mutation SIGN_IN_MUTATION(email: String!, password: String!) {
-        ... on UserAuthenticationWithPasswordSuccess {
-            item {
-                id
-                name
-                email
+    mutation SIGN_IN_MUTATION($email: String!, $password: String!) {
+        authenticateUserWithPassword(email: $email, password: $password){
+            ... on UserAuthenticationWithPasswordSuccess {
+                item {
+                    id
+                    name
+                    email
+                }
+            },
+            ... on UserAuthenticationWithPasswordFailure {
+                code
+                message
             }
         }
     }
 `;
-
 
 export default function SignIn() {
 
@@ -23,15 +28,19 @@ export default function SignIn() {
         email: '',
         password: '',
     });
-    const [signIn, { loading, error }] = useMutation(SIGN_IN_MUTATION, {
+    const [signin, { loading, error }] = useMutation(SIGN_IN_MUTATION, {
         variables: inputs,
-        refetchQueries: [CURRENT_USER_QUERY]
+        refetchQueries: [{query: CURRENT_USER_QUERY}]
     });
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault(); //stop form from submitting early
         //send email and password to graphQL API
-
+        // await signin();
+        //const res for logging only
+        const res = await signin()
+        console.log({res});
+        
     };
 
     return (
