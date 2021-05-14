@@ -14,11 +14,11 @@ export default function Nav() {
                         <Link href="/sell">Sell</Link>
                         <Link href="/orders">Orders</Link>
                         <Link href="/account">Account</Link>
-            </> )};
+            </> )}
             {/* if not signed in */}
             { !user && ( <>
                 <Link href="/signin">Sign In</Link>
-            </> )};
+            </> )}
         </NavStyles>
     );
 }; 
