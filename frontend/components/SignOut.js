@@ -1,6 +1,4 @@
-import Form from './styles/Form';
-import useForm from "../lib/useForm";
-import DisplayError from './ErrorMessage';
+import Router from 'next/router';
 import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import { CURRENT_USER_QUERY } from './User';
@@ -18,6 +16,12 @@ export default function SignOut({children}){
     });
 
     return (
-        <button type="button" onClick={signout}>Sign Out</button>
+        <button type="button" onClick={() => {
+            signout();
+            console.log('Okay, Luv ya, Buh Bye!');
+            Router.push({
+                pathname: `/products`,
+            });
+        }}>Sign Out</button>
     )
 };
