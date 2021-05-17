@@ -37,7 +37,8 @@ export default function SignUp() {
         //send email and password to graphQL API
         // await signin();
         //const res for logging only
-        const res = await signup()
+        //catch prevents popup dialog in favor of console
+        const res = await signup().catch(console.error)
         console.log({ res });
         console.log({data, error, loading});
         
