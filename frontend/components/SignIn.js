@@ -75,7 +75,7 @@ export default function SignIn() {
                         type="password"
                         id="password"
                         name="password"
-                        placeholder="..And Your Password"
+                        placeholder="...And We Will Know You By The Password You Enter"
                         autoComplete="password"
                         value={inputs.password}
                         onChange={handleChange}

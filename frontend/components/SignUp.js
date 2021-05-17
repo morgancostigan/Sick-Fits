@@ -27,6 +27,7 @@ export default function SignUp() {
 
     const { inputs, handleChange, clearForm, resetForm } = useForm({
         email: '',
+        name: '',
         password: '',
     });
     const [signup, { data, loading }] = useMutation(SIGN_UP_MUTATION, {
@@ -63,9 +64,22 @@ export default function SignUp() {
                         type="email"
                         id="email"
                         name="email"
-                        placeholder="Please Enter Your Email"
+                        placeholder="What Email Address Are You Using?"
                         autoComplete="email"
                         value={inputs.email}
+                        onChange={handleChange}
+                    />
+                </label>
+                <label htmlFor="name">
+                    Name
+                    <input
+                        required
+                        type="name"
+                        id="name"
+                        name="name"
+                        placeholder="What Are You Called?"
+                        autoComplete="name"
+                        value={inputs.name}
                         onChange={handleChange}
                     />
                 </label>
@@ -75,7 +89,7 @@ export default function SignUp() {
                         type="password"
                         id="password"
                         name="password"
-                        placeholder="..And Your Password"
+                        placeholder="...And We Will Know You By The Password You Enter"
                         autoComplete="password"
                         value={inputs.password}
                         onChange={handleChange}
