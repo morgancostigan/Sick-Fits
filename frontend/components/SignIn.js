@@ -40,7 +40,7 @@ export default function SignIn() {
         //const res for logging only
         const res = await signin()
         console.log({res});
-        
+        resetForm();
     };
 
     return (
