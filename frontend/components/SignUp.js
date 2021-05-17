@@ -3,6 +3,7 @@ import useForm from "../lib/useForm";
 import DisplayError from './ErrorMessage';
 import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
+import Router from 'next/router';
 import { CURRENT_USER_QUERY } from './User';
 
 const SIGN_UP_MUTATION = gql`
@@ -42,8 +43,6 @@ export default function SignUp() {
         
         resetForm();
     };
-    //error is weird here.  if there is error data that matches the typename, then display it...  else, undefined
-    // const error = data?.authenticateUserWithPassword?.__typename === "UserAuthenticationWithPasswordFailure" ? data?.authenticateUserWithPassword : undefined;
 
     return (
         //method POST to prevent password from showing in URL, history, and logs
@@ -53,21 +52,13 @@ export default function SignUp() {
             <DisplayError error={error} />
 
             <fieldset disabled={loading} aria-busy={loading}>
+                {
+                data?.createUser && <div>
+                        <p>You Are Now One Of Us!</p>
+                        <p>{data.createUser.email} is now registered. Go ahead and sign in!</p>
+                    </div>
+                }
                 {/* <fieldset> */}
-
-                <label htmlFor="email">
-                    Email
-                    <input
-                        required
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="What Email Address Are You Using?"
-                        autoComplete="email"
-                        value={inputs.email}
-                        onChange={handleChange}
-                    />
-                </label>
                 <label htmlFor="name">
                     Name
                     <input
@@ -78,6 +69,19 @@ export default function SignUp() {
                         placeholder="What Are You Called?"
                         autoComplete="name"
                         value={inputs.name}
+                        onChange={handleChange}
+                    />
+                </label>
+                <label htmlFor="email">
+                    Email
+                    <input
+                        required
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="What Email Address Are You Using?"
+                        autoComplete="email"
+                        value={inputs.email}
                         onChange={handleChange}
                     />
                 </label>
@@ -93,7 +97,7 @@ export default function SignUp() {
                         onChange={handleChange}
                     />
                 </label>
-                <button type="submit">Sign In</button>
+                <button type="submit">Sign Up</button>
             </fieldset>
 
             {/* //EXAMPLE methods */}

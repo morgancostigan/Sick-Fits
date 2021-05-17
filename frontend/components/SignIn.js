@@ -4,6 +4,8 @@ import DisplayError from './ErrorMessage';
 import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import { CURRENT_USER_QUERY } from './User';
+import Router from 'next/router';
+
 
 const SIGN_IN_MUTATION = gql`
     mutation SIGN_IN_MUTATION($email: String!, $password: String!) {
@@ -39,7 +41,11 @@ export default function SignIn() {
         //send email and password to graphQL API
         // await signin();
         //const res for logging only
-        const res = await signin()
+        const res = await signin(
+            Router.push({
+                pathname: `/products`,
+            })
+        )
         console.log({res});
         resetForm();
     };
