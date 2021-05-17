@@ -50,7 +50,7 @@ export default function SignUp() {
         //method POST to prevent password from showing in URL, history, and logs
         <Form method="post" onSubmit={handleSubmit}>
             {/* <DisplayError error={error} /> */}
-            <h2>Go Ahead And Sign On In</h2>
+            <h2>Get Signed Up</h2>
             <DisplayError error={error} />
 
             <fieldset disabled={loading} aria-busy={loading}>
