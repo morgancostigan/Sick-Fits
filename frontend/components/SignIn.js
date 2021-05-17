@@ -43,7 +43,7 @@ export default function SignIn() {
         console.log({res});
         resetForm();
     };
-
+    //error is weird here.  if there is error data that matches the typename, then display it...  else, undefined
     const error = data?.authenticateUserWithPassword?.__typename === "UserAuthenticationWithPasswordFailure" ? data?.authenticateUserWithPassword : undefined;
 
     return (
@@ -52,9 +52,9 @@ export default function SignIn() {
             {/* <DisplayError error={error} /> */}
             <h2>Go Ahead And Sign On In</h2>
             <DisplayError error={error} />
-            {/* <DisplayError error={data?.authenticateUserWithPassword?.UserAuthenticationWithPasswordFailure?.message} /> */}
-            {/* <fieldset disabled={loading} aria-busy={loading}> */}
-            <fieldset>
+
+            <fieldset disabled={loading} aria-busy={loading}>
+            {/* <fieldset> */}
 
                 <label htmlFor="email">
                     Email
