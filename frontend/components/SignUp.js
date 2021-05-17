@@ -6,19 +6,15 @@ import gql from 'graphql-tag';
 import { CURRENT_USER_QUERY } from './User';
 
 const SIGN_UP_MUTATION = gql`
-    mutation SIGN_UP_MUTATION($email: String!, $password: String!) {
-        authenticateUserWithPassword(email: $email, password: $password){
-            ... on UserAuthenticationWithPasswordSuccess {
-                item {
-                    id
-                    name
-                    email
-                }
-            },
-            ... on UserAuthenticationWithPasswordFailure {
-                code
-                message
-            }
+    mutation SIGN_UP_MUTATION($email: String!, $password: String!, $name: String!) {
+        createUser(data: {
+            email: $email,
+            name: $name,
+            password: $password
+        }){
+            id
+            name
+            email
         }
     }
 `;
@@ -30,9 +26,9 @@ export default function SignUp() {
         name: '',
         password: '',
     });
-    const [signup, { data, loading }] = useMutation(SIGN_UP_MUTATION, {
+    const [signup, { data, loading, error }] = useMutation(SIGN_UP_MUTATION, {
         variables: inputs,
-        refetchQueries: [{ query: CURRENT_USER_QUERY }]
+        // refetchQueries: [{ query: CURRENT_USER_QUERY }]
     });
 
     async function handleSubmit(e) {
@@ -42,16 +38,18 @@ export default function SignUp() {
         //const res for logging only
         const res = await signup()
         console.log({ res });
+        console.log({data, error, loading});
+        
         resetForm();
     };
     //error is weird here.  if there is error data that matches the typename, then display it...  else, undefined
-    const error = data?.authenticateUserWithPassword?.__typename === "UserAuthenticationWithPasswordFailure" ? data?.authenticateUserWithPassword : undefined;
+    // const error = data?.authenticateUserWithPassword?.__typename === "UserAuthenticationWithPasswordFailure" ? data?.authenticateUserWithPassword : undefined;
 
     return (
         //method POST to prevent password from showing in URL, history, and logs
         <Form method="post" onSubmit={handleSubmit}>
             {/* <DisplayError error={error} /> */}
-            <h2>Get Signed Up</h2>
+            <h2>..or Get Signed Up</h2>
             <DisplayError error={error} />
 
             <fieldset disabled={loading} aria-busy={loading}>
@@ -74,7 +72,7 @@ export default function SignUp() {
                     Name
                     <input
                         required
-                        type="name"
+                        type="text"
                         id="name"
                         name="name"
                         placeholder="What Are You Called?"
