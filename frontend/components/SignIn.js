@@ -1,5 +1,6 @@
 import Form from './styles/Form';
 import useForm from "../lib/useForm";
+import DisplayError from './ErrorMessage';
 import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import { CURRENT_USER_QUERY } from './User';
@@ -28,7 +29,7 @@ export default function SignIn() {
         email: '',
         password: '',
     });
-    const [signin, { loading, error }] = useMutation(SIGN_IN_MUTATION, {
+    const [signin, { data, loading }] = useMutation(SIGN_IN_MUTATION, {
         variables: inputs,
         refetchQueries: [{query: CURRENT_USER_QUERY}]
     });
@@ -43,11 +44,15 @@ export default function SignIn() {
         resetForm();
     };
 
+    const error = data?.authenticateUserWithPassword?.__typename === "UserAuthenticationWithPasswordFailure" ? data?.authenticateUserWithPassword : undefined;
+
     return (
         //method POST to prevent password from showing in URL, history, and logs
         <Form method="post" onSubmit={handleSubmit}>
             {/* <DisplayError error={error} /> */}
             <h2>Go Ahead And Sign On In</h2>
+            <DisplayError error={error} />
+            {/* <DisplayError error={data?.authenticateUserWithPassword?.UserAuthenticationWithPasswordFailure?.message} /> */}
             {/* <fieldset disabled={loading} aria-busy={loading}> */}
             <fieldset>
 
