@@ -4,3 +4,6 @@ Sick Fits Backend
 # Node
 # MongoDB Atlas
 # TypeScript
+# Cloudinary
+# GraphQL
+# Apollo
