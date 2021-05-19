@@ -6,13 +6,9 @@ import gql from 'graphql-tag';
 import Router from 'next/router';
 import { CURRENT_USER_QUERY } from './User';
 
-const SIGN_UP_MUTATION = gql`
-    mutation SIGN_UP_MUTATION($email: String!, $password: String!, $name: String!) {
-        createUser(data: {
-            email: $email,
-            name: $name,
-            password: $password
-        }){
+const REQUEST_RESET_MUTATION = gql`
+    mutation REQUEST_RESET_MUTATION($email: String!) {
+        sendUserPasswordResetLink(email: $email){
             id
             name
             email
@@ -25,7 +21,7 @@ export default function RequestReset() {
     const { inputs, handleChange, clearForm, resetForm } = useForm({
         email: '',
     });
-    const [signup, { data, loading, error }] = useMutation(SIGN_UP_MUTATION, {
+    const [signup, { data, loading, error }] = useMutation(REQUEST_RESET_MUTATION, {
         variables: inputs,
         // refetchQueries: [{ query: CURRENT_USER_QUERY }]
     });
