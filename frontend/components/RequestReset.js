@@ -9,9 +9,8 @@ import { CURRENT_USER_QUERY } from './User';
 const REQUEST_RESET_MUTATION = gql`
     mutation REQUEST_RESET_MUTATION($email: String!) {
         sendUserPasswordResetLink(email: $email){
-            id
-            name
-            email
+            code
+            message
         }
     }
 `;
@@ -21,7 +20,7 @@ export default function RequestReset() {
     const { inputs, handleChange, clearForm, resetForm } = useForm({
         email: '',
     });
-    const [signup, { data, loading, error }] = useMutation(REQUEST_RESET_MUTATION, {
+    const [requestReset, { data, loading, error }] = useMutation(REQUEST_RESET_MUTATION, {
         variables: inputs,
         // refetchQueries: [{ query: CURRENT_USER_QUERY }]
     });
@@ -32,11 +31,11 @@ export default function RequestReset() {
         // await signin();
         //const res for logging only
         //catch prevents popup dialog in favor of console
-        const res = await signup().catch(console.error)
+        const res = await requestReset().catch(console.error);
         console.log({ res });
-        console.log({ data, error, loading });
+        console.log({ data, error, loading })
 
-        resetForm();
+        // resetForm();
     };
 
     return (
@@ -48,9 +47,9 @@ export default function RequestReset() {
 
             <fieldset disabled={loading} aria-busy={loading}>
                 {
-                    data?.createUser && <div>
-                        <p>Reset link sent to {data.createUser.email}.</p>
-                    </div>
+                    data?.sendUserPasswordResetLink === null && (
+                        <p>Reset link sent to {inputs.email}.</p>
+                    )
                 }
                 {/* <fieldset> */}
                 
