@@ -15,12 +15,14 @@ const REQUEST_RESET_MUTATION = gql`
     }
 `;
 
-export default function RequestReset() {
+export default function ResetPassword() {
 
     const { inputs, handleChange, clearForm, resetForm } = useForm({
         email: '',
+        password: '',
+        token: '',
     });
-    const [requestReset, { data, loading, error }] = useMutation(REQUEST_RESET_MUTATION, {
+    const [resetPassword, { data, loading, error }] = useMutation(REQUEST_RESET_MUTATION, {
         variables: inputs,
         // refetchQueries: [{ query: CURRENT_USER_QUERY }]
     });
@@ -31,7 +33,7 @@ export default function RequestReset() {
         // await signin();
         //const res for logging only
         //catch prevents popup dialog in favor of console
-        const res = await requestReset().catch(console.error);
+        const res = await resetPassword().catch(console.error);
         console.log({ res });
         console.log({ data, error, loading })
 
@@ -42,13 +44,13 @@ export default function RequestReset() {
         //method POST to prevent password from showing in URL, history, and logs
         <Form method="post" onSubmit={handleSubmit}>
             {/* <DisplayError error={error} /> */}
-            <h2>Reset Password</h2>
+            <h2>Choose New Password</h2>
             <DisplayError error={error} />
 
             <fieldset disabled={loading} aria-busy={loading}>
                 {
                     data?.sendUserPasswordResetLink === null && (
-                        <p>Reset link sent to {inputs.email}.</p>
+                        <p>Password Successfully Reset, Please Sign In.</p>
                     )
                 }
                 {/* <fieldset> */}
@@ -66,8 +68,20 @@ export default function RequestReset() {
                         onChange={handleChange}
                     />
                 </label>
-
-                <button type="submit">Send Reset Link</button>
+                <label htmlFor="password">
+                    New Password
+                    <input
+                        required
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Please Enter a New Password"
+                        autoComplete="password"
+                        value={inputs.password}
+                        onChange={handleChange}
+                    />
+                </label>
+                <button type="submit">Submit</button>
             </fieldset>
 
             {/* //EXAMPLE methods */}
