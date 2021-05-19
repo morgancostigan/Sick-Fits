@@ -27,9 +27,22 @@ function writeSomethingFriendly(text: string) : string {
     `;
 };
 
-interface MailResponse{
-    message: string,
+//got this from JSON.stringify(response) copied to www.http://jvilk.com/MakeTypes/
+export interface MailResponse {
+  accepted?: (string)[] | null;
+  rejected?: (null)[] | null;
+  envelopeTime: number;
+  messageTime: number;
+  messageSize: number;
+  response: string;
+  envelope: Envelope;
+  messageId: string;
 }
+export interface Envelope {
+  from: string;
+  to?: (null)[] | null;
+}
+
 
 export async function sendPasswordResetEmail(
     resetToken: string, 
