@@ -23,12 +23,12 @@ const RESET_MUTATION = gql`
     }
 `;
 
-export default function ResetPassword() {
+export default function ResetPassword({ token }) {
 
     const { inputs, handleChange, clearForm, resetForm } = useForm({
         email: '',
         password: '',
-        token: '',
+        token,
     });
     const [resetPassword, { data, loading }] = useMutation(RESET_MUTATION, {
         variables: inputs,
