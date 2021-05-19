@@ -20,12 +20,10 @@ const SIGN_UP_MUTATION = gql`
     }
 `;
 
-export default function SignUp() {
+export default function RequestReset() {
 
     const { inputs, handleChange, clearForm, resetForm } = useForm({
         email: '',
-        name: '',
-        password: '',
     });
     const [signup, { data, loading, error }] = useMutation(SIGN_UP_MUTATION, {
         variables: inputs,
@@ -49,30 +47,17 @@ export default function SignUp() {
         //method POST to prevent password from showing in URL, history, and logs
         <Form method="post" onSubmit={handleSubmit}>
             {/* <DisplayError error={error} /> */}
-            <h2>..or Get Signed Up</h2>
+            <h2>Reset Password</h2>
             <DisplayError error={error} />
 
             <fieldset disabled={loading} aria-busy={loading}>
                 {
                     data?.createUser && <div>
-                        <p>You Are Now One Of Us!</p>
-                        <p>{data.createUser.email} is now registered. Go ahead and sign in!</p>
+                        <p>Reset link sent to {data.createUser.email}.</p>
                     </div>
                 }
                 {/* <fieldset> */}
-                <label htmlFor="name">
-                    Name
-                    <input
-                        required
-                        type="text"
-                        id="name"
-                        name="name"
-                        placeholder="What Are You Called?"
-                        autoComplete="name"
-                        value={inputs.name}
-                        onChange={handleChange}
-                    />
-                </label>
+                
                 <label htmlFor="email">
                     Email
                     <input
@@ -86,19 +71,8 @@ export default function SignUp() {
                         onChange={handleChange}
                     />
                 </label>
-                <label htmlFor="password">
-                    Password
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="...And We Will Know You By The Password You Enter"
-                        autoComplete="password"
-                        value={inputs.password}
-                        onChange={handleChange}
-                    />
-                </label>
-                <button type="submit">Sign Up</button>
+                
+                <button type="submit">Send Reset Link</button>
             </fieldset>
 
             {/* //EXAMPLE methods */}
