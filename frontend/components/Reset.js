@@ -6,9 +6,17 @@ import gql from 'graphql-tag';
 import Router from 'next/router';
 import { CURRENT_USER_QUERY } from './User';
 
-const REQUEST_RESET_MUTATION = gql`
-    mutation REQUEST_RESET_MUTATION($email: String!) {
-        sendUserPasswordResetLink(email: $email){
+const RESET_MUTATION = gql`
+    mutation RESET_MUTATION(
+            $email: String!, 
+            $token: String!, 
+            $password: String!
+    ){
+        redeemUserPasswordResetToken(
+            email: $email,
+            password: $password,
+            token: $token
+        ){
             code
             message
         }
@@ -22,10 +30,16 @@ export default function ResetPassword() {
         password: '',
         token: '',
     });
-    const [resetPassword, { data, loading, error }] = useMutation(REQUEST_RESET_MUTATION, {
+    const [resetPassword, { data, loading }] = useMutation(RESET_MUTATION, {
         variables: inputs,
-        // refetchQueries: [{ query: CURRENT_USER_QUERY }]
     });
+
+    //if rreturned data includes a code, that IS the error, else no error
+    const error = data?.redeemUserPasswordResetToken?.code 
+    ? data.redeemUserPasswordResetToken 
+    : undefined;
+    console.log({error});
+    
 
     async function handleSubmit(e) {
         e.preventDefault(); //stop form from submitting early
@@ -34,8 +48,8 @@ export default function ResetPassword() {
         //const res for logging only
         //catch prevents popup dialog in favor of console
         const res = await resetPassword().catch(console.error);
-        console.log({ res });
-        console.log({ data, error, loading })
+        // console.log({ res });
+        // console.log({ data, error, loading })
 
         // resetForm();
     };
@@ -49,7 +63,7 @@ export default function ResetPassword() {
 
             <fieldset disabled={loading} aria-busy={loading}>
                 {
-                    data?.sendUserPasswordResetLink === null && (
+                    data?.redeemUserPasswordResetToken === null && (
                         <p>Password Successfully Reset, Please Sign In.</p>
                     )
                 }

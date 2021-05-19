@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import RequestReset from '../components/RequestReset';
+import Reset from '../components/Reset';
+
 
 
 export default function ResetPage({query}) {
@@ -14,6 +16,7 @@ export default function ResetPage({query}) {
     return (
         <div>
             <p>Reset Your Password {query.token}</p>
+            <Reset />
         </div>
     )
 };
