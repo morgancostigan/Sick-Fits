@@ -5,6 +5,11 @@ import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
 import { CURRENT_USER_QUERY } from './User';
+import { SIGN_IN_MUTATION } from './SignIn';
+
+//TODO, upon resetting password, sign user in.
+//if too tricky, send to Sign In page
+
 
 const RESET_MUTATION = gql`
     mutation RESET_MUTATION(
@@ -30,15 +35,16 @@ export default function ResetPassword({ token }) {
         password: '',
         token,
     });
-    const [resetPassword, { data, loading }] = useMutation(RESET_MUTATION, {
+    const [resetPassword, { data, loading, error }] = useMutation(RESET_MUTATION, {
         variables: inputs,
+ 
     });
 
     //if rreturned data includes a code, that IS the error, else no error
-    const error = data?.redeemUserPasswordResetToken?.code 
+    const successfulError = data?.redeemUserPasswordResetToken?.code 
     ? data.redeemUserPasswordResetToken 
     : undefined;
-    console.log({error});
+    // console.log({error});
     
 
     async function handleSubmit(e) {
@@ -59,7 +65,7 @@ export default function ResetPassword({ token }) {
         <Form method="post" onSubmit={handleSubmit}>
             {/* <DisplayError error={error} /> */}
             <h2>Choose New Password</h2>
-            <DisplayError error={error} />
+            <DisplayError error={error || successfulError} />
 
             <fieldset disabled={loading} aria-busy={loading}>
                 {

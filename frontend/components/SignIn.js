@@ -7,7 +7,7 @@ import { CURRENT_USER_QUERY } from './User';
 import Router from 'next/router';
 
 
-const SIGN_IN_MUTATION = gql`
+export const SIGN_IN_MUTATION = gql`
     mutation SIGN_IN_MUTATION($email: String!, $password: String!) {
         authenticateUserWithPassword(email: $email, password: $password){
             ... on UserAuthenticationWithPasswordSuccess {
