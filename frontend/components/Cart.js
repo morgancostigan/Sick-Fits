@@ -1,5 +1,10 @@
 import CartStyles from './styles/CartStyles';
+import { useUser } from './User';
+
 
 export default function Cart() {
-    return <CartStyles>Hallo!</CartStyles>
+    const me = useUser ();
+    return <CartStyles open>
+        {me.email}
+    </CartStyles>
 }
