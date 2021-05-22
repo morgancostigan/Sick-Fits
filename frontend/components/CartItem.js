@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import formatMoney from "../lib/formatMoney";
 
 const CartItemStyles = styled.li`
     padding: 1rem 0;
@@ -6,6 +7,7 @@ const CartItemStyles = styled.li`
     display: grid;
     grid-template-columns: : auto 1fr auto;
     img {
+        width: 100px;
         margin-right: 1rem;
     }
     h3, p {
@@ -21,6 +23,10 @@ export default function CartItem({cartItem}) {
     return (
         <CartItemStyles>
             <img src={pic} alt={cartItem.name}/>
+            <div>
+                <h3>{product.name}</h3>
+                <p>{formatMoney(product.price * cartItem.quantity)}</p>
+            </div>
 
         </CartItemStyles>
     )
