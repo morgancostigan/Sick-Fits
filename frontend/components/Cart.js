@@ -2,6 +2,7 @@ import CartStyles from './styles/CartStyles';
 import Supreme from '../components/styles/Supreme';
 import CartItem from '../components/CartItem';
 import { useUser } from './User';
+import formatMoney from '../lib/formatMoney';
 
 // function CartItem({ cartItem }) {
 //     return <li>{cartItem.id}</li>;
@@ -26,5 +27,10 @@ export default function Cart() {
             cartItem={cartItem}
             />)}
         </ul>
+        <footer>
+            <p>
+                {formatMoney(calcTotalPrice(me.cart))}
+            </p>
+        </footer>
     </CartStyles>
 }

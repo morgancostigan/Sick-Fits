@@ -25,7 +25,12 @@ export default function CartItem({cartItem}) {
             <img src={pic} alt={cartItem.name}/>
             <div>
                 <h3>{product.name}</h3>
-                <p>{formatMoney(product.price * cartItem.quantity)}</p>
+                <p>
+                    {formatMoney(product.price * cartItem.quantity)} total
+                </p>
+                <p>
+                    <em>{cartItem.quantity} &times; {formatMoney(product.price)} each</em>
+                </p>
             </div>
 
         </CartItemStyles>
