@@ -18,11 +18,23 @@ export default async function addToCart(
         where: {user: {id: sesh.itemId}, product: {id: productID}}
     });
     const [existingCartItem] = allCartItems;
+    // see if item being added is already in cart
+    // if yes, increment. 
     if(existingCartItem){
         console.log(`Your cart already contains ${existingCartItem.quantity} of these in your cart, so we've added another.`);
-        return await context.lists.CartItem.updateOne;
-    };
-    // see if item being added is already in cart
-    // if yes, increment.  if no, create new CartItem
-    
+        return await context.lists.CartItem.updateOne({
+            id: existingCartItem.id,
+            data: {
+                quantity: existingCartItem.quantity + 1
+            }
+        });
+    }; 
+
+    // if no, create new CartItem
+    return await context.lists.CartItem.createOne({
+        data: {
+            product: { connect: { id: productId }},
+            user: { connect: { id: sesh.itemId }},
+        }
+    })
 };
