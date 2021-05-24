@@ -10,7 +10,7 @@ export default function CartStateProvider({ children }) {
     //accessible anywhere in the app via consumer
 
     //default to closed cart
-    const [cartOpen, setCartOpen] = useState(true);
+    const [cartOpen, setCartOpen] = useState(false);
 
     function toggleCart() {
         //toggle to opposite value

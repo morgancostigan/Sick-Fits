@@ -21,7 +21,7 @@ export default function Nav() {
                         <Link href="/account">Account</Link>
                         {/* <Link href="/cart">Cart</Link> */}
                         <SignOut />
-                        <button type="button" onClick={openCart}>My Cart</button>
+                <button type="button" onClick={openCart}>🛒</button>
             </> )}
             {/* if not signed in */}
             { !user && ( <>
