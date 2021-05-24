@@ -26,7 +26,15 @@ export default function CartStateProvider({ children }) {
     };
 
     return (
-        <LocalStateProvider value={{ cartOpen, setCartOpen }}>
+        <LocalStateProvider 
+            value={{ 
+                cartOpen, 
+                setCartOpen,
+                toggleCart,
+                openCart,
+                closeCart,
+            }}
+        >
             {children}
         </LocalStateProvider>
     );
