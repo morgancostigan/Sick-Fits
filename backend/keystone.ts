@@ -1,6 +1,7 @@
 import { config, createSchema } from '@keystone-next/keystone/schema';
 import { withItemData, statelessSessions } from '@keystone-next/keystone/session';import { createAuth } from '@keystone-next/auth';
 import { User } from './schemas/User';
+import { extendGraphqlSchema } from './mutations/index';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
 import { CartItem } from './schemas/CartItem';
@@ -56,6 +57,7 @@ export default withAuth(config({
         ProductImage,
         CartItem,
     }),
+    extendGraphqlSchema,
     ui: {
         //show UI only to users who get past this
         isAccessAllowed: ({ session }) => {
