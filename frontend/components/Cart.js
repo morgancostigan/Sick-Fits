@@ -3,6 +3,7 @@ import Supreme from '../components/styles/Supreme';
 import CartItem from '../components/CartItem';
 import { useUser } from './User';
 import formatMoney from '../lib/formatMoney';
+import calcTotalPrice from '../lib/calcTotalPrice';
 
 // function CartItem({ cartItem }) {
 //     return <li>{cartItem.id}</li>;

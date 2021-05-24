@@ -26,7 +26,7 @@ export default function CartItem({cartItem}) {
             <div>
                 <h3>{product.name}</h3>
                 <p>
-                    {formatMoney(product.price * cartItem.quantity)} total
+                    {formatMoney(product.price * cartItem.quantity)} subtotal
                 </p>
                 <p>
                     <em>{cartItem.quantity} &times; {formatMoney(product.price)} each</em>
