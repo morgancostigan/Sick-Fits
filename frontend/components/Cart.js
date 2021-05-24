@@ -14,7 +14,7 @@ import { useCart } from '../lib/cartState';
 
 export default function Cart() {
     const me = useUser();
-    const {cartOpen} = useCart();
+    const { cartOpen, closeCart } = useCart();
     if(!me) return null;
     console.log({me});
     
@@ -24,6 +24,7 @@ export default function Cart() {
                 {me.name}'s cart
             </Supreme>
         </header>
+        <button onClick={closeCart}>Hide Cart >>></button>
         <ul>
             {me.cart.map((cartItem) => <CartItem 
             key={cartItem.id} 
