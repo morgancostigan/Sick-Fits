@@ -4,6 +4,7 @@ import CartItem from '../components/CartItem';
 import { useUser } from './User';
 import formatMoney from '../lib/formatMoney';
 import calcTotalPrice from '../lib/calcTotalPrice';
+import { useCart } from '../lib/cartState';
 
 // function CartItem({ cartItem }) {
 //     return <li>{cartItem.id}</li>;
@@ -12,11 +13,12 @@ import calcTotalPrice from '../lib/calcTotalPrice';
 
 
 export default function Cart() {
-    const me = useUser ();
+    const me = useUser();
+    const {cartOpen} = useCart();
     if(!me) return null;
     console.log({me});
     
-    return <CartStyles open>
+    return <CartStyles open={cartOpen}>
         <header>
             <Supreme>
                 {me.name}'s cart

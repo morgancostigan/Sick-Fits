@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react/cjs/react.production.min";
+import { createContext, useContext, useState } from 'react';
 
 const LocalStateContext = createContext();
 const LocalStateProvider = LocalStateContext.Provider;
@@ -8,9 +8,17 @@ export default function CartStateProvider({ children }) {
     //This is a custom Provider
     //we store data (state) and functionality (updaters)
     //accessible anywhere in the app via consumer
-    const cartOpen = true;
+
+    //default to closed cart
+    const [cartOpen, setCartOpen] = useState(false);
+
+    function toggleCart() {
+        //toggle to opposite value
+        setCartOpen(!cartOpen);
+    };
+
     return (
-        <LocalStateProvider value={{ cartOpen }}>
+        <LocalStateProvider value={{ cartOpen, setCartOpen }}>
             {children}
         </LocalStateProvider>
     );
