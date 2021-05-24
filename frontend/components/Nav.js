@@ -1,11 +1,14 @@
 import Link from 'next/link';
 import NavStyles from '../components/styles/NavStyles';
 import { useUser } from './User';
+import { useCart } from '../lib/cartState';
 import SignOut from '../components/SignOut';
 
 
 export default function Nav() {
     const user = useUser();
+    const { cartOpen, closeCart, openCart } = useCart();
+
     console.log({user});
     
     return (
@@ -18,6 +21,7 @@ export default function Nav() {
                         <Link href="/account">Account</Link>
                         {/* <Link href="/cart">Cart</Link> */}
                         <SignOut />
+                        <button type="button" onClick={openCart}>My Cart</button>
             </> )}
             {/* if not signed in */}
             { !user && ( <>
