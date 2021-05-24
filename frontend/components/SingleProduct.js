@@ -49,7 +49,7 @@ export default function SingleProduct({ id }) {
     if(loading) return <p>Wait for it... Wait for it...</p>;
     if(error) return <DisplayError error={error}/>;
     const { Product } = data;
-    console.log({ data, loading, error });
+    // console.log({ data, loading, error });
     return (
         <SingleProductStyles>
             <Head>

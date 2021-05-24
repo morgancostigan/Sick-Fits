@@ -32,8 +32,8 @@ export default function RequestReset() {
         //const res for logging only
         //catch prevents popup dialog in favor of console
         const res = await requestReset().catch(console.error);
-        console.log({ res });
-        console.log({ data, error, loading })
+        // console.log({ res });
+        // console.log({ data, error, loading })
 
         // resetForm();
     };

@@ -82,7 +82,7 @@ export default function UpdateProduct({id}) {
                     description: inputs.description,
                 },
             }).catch(console.error);
-            console.log({res});
+            // console.log({res});
             
 
             //TODO handle submit

@@ -9,7 +9,7 @@ export default function Nav() {
     const user = useUser();
     const { cartOpen, closeCart, openCart } = useCart();
 
-    console.log({user});
+    // console.log({user});
     
     return (
         <NavStyles>

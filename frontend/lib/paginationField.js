@@ -5,7 +5,7 @@ export default function paginationField() {
         keyArgs: false, //tells Apollo we will deal with this
         read(existing =[], { args, cache }) {
             //Apollo asks read function for allProducts
-            console.log({existing, args, cache});
+            // console.log({existing, args, cache});
             const { skip, first } = args;
             //read # of items on page from cache
             const data = cache.readQuery({ query: PAGINATION_QUERY });
@@ -48,7 +48,7 @@ export default function paginationField() {
             for (let i = skip; i <  skip + incoming.length; ++i) {
                 merged[i] = incoming [i - skip]
             };
-            console.log({merged});
+            // console.log({merged});
             //return merged itemd from cache, which automatically refires read fucntion
             return merged;
             

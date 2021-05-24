@@ -11,7 +11,7 @@ const DELETE_PRODUCT_MUTATION = gql`
 `;
 
 function update(cache, payload) {
-    console.log({payload});
+    // console.log({payload});
     console.log('Running update fnction after Delete.');
     //remove payload item from Apollo cache
     cache.evict(cache.identify(payload.data.deleteProduct))

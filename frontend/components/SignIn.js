@@ -46,7 +46,7 @@ export default function SignIn() {
                 pathname: `/products`,
             })
         )
-        console.log({res});
+        // console.log({res});
         resetForm();
     };
     //error is weird here.  if there is error data that matches the typename, then display it...  else, undefined

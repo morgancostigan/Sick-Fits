@@ -18,7 +18,7 @@ const CartItemStyles = styled.li`
 export default function CartItem({cartItem}) {
     const { product } = cartItem;
     const pic = cartItem.product.photo.image.publicUrlTransformed;
-    console.log({cartItem});
+    // console.log({cartItem});
     
     return (
         <CartItemStyles>
