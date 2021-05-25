@@ -4,7 +4,7 @@ import { Session } from "../types";
 
 export default async function addToCart(
     root: any, 
-    {productID}: {productID: string},
+    {productId}: {productId: string},
     context: KeystoneContext,
 ): Promise<CartItemCreateInput> {
     console.log('adding to the damn cart!');
@@ -15,7 +15,8 @@ export default async function addToCart(
     }
     // query their cart
     const allCartItems = await context.lists.CartItem.findMany({
-        where: {user: {id: sesh.itemId}, product: {id: productID}}
+        where: {user: {id: sesh.itemId}, product: {id: productId}},
+        resolveFields: 'id, quantity'
     });
     console.log({allCartItems});
     
@@ -28,14 +29,15 @@ export default async function addToCart(
             id: existingCartItem.id,
             data: {
                 quantity: existingCartItem.quantity + 1
-            }
+            },
+            resolveFields: false
         });
     }; 
 
     // if no, create new CartItem
     return await context.lists.CartItem.createOne({
         data: {
-            product: { connect: { id: productID }},
+            product: { connect: { id: productId }},
             user: { connect: { id: sesh.itemId }},
         }
     })

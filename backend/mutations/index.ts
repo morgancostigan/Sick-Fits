@@ -8,7 +8,7 @@ export const extendGraphqlSchema = graphQLSchemaExtension({
     //REMOVE THIS GQL vvv
     typeDefs: graphql`
         type Mutation {
-            addToCart(productID: ID): CartItem
+            addToCart(productId: ID): CartItem
         }
     `,
     resolvers: {
