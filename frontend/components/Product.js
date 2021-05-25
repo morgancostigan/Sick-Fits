@@ -1,6 +1,7 @@
 import ItemStyles from '../components/styles/ItemStyles';
 import Title from '../components/styles/Title';
 import PriceTag from '../components/styles/PriceTag';
+import AddToCart from '../components/AddToCart';
 import Link from 'next/link';
 import formatMoney from '../lib/formatMoney';
 import DeleteProduct from './DeleteProduct';
@@ -28,6 +29,7 @@ export default function Product({ product }) {
                 }}>
                     Edit
                 </Link>
+                <AddToCart />
                 <DeleteProduct id={product.id}>
                     Delete
 
