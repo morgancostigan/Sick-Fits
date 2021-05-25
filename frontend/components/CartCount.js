@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const Dot = styled.div`
     background: var(--red);
@@ -14,5 +15,18 @@ const Dot = styled.div`
 `;
 
 export default function CartCount({count}){
-    return <Dot>{count}</Dot>
+    return (
+        <TransitionGroup>
+            <CSSTransition 
+                unmountOnExit 
+                className="count" 
+                classNames="count" 
+                key={count}
+                timeout={{enter: 400, exit: 400}}
+            >
+                <Dot>{count}</Dot>
+ 
+            </CSSTransition>
+        </TransitionGroup>
+    )
 }
