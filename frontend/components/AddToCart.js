@@ -1,3 +1,4 @@
+import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 
 
@@ -8,17 +9,18 @@ const ADD_TO_CART_MUTATION = gql`
 `;
 
 const ADD_TO_CART_MUTATION = gql`
-    mutation ADD_TO_CART_MUTATION(
-        # which variables (and their types) are passed in?
-        $productId: ID!
-    ) {
-        addToCart (productId: $productId){
+    mutation ADD_TO_CART_MUTATION( $id: ID!) {
+        addToCart (productId: $id){
             id
             quantity
         }
     }
 `;
 
-export default function AddToCart() {
+export default function AddToCart({id}) {
+    const [addToCart, { loading }] = useMutation(ADD_TO_CART_MUTATION, {
+        variables: { id: id }
+    })
+    return <button type="button">Add</button>
     
 }
