@@ -14,6 +14,11 @@ export default function AddToCart({id}) {
     const [addToCart, { loading }] = useMutation(ADD_TO_CART_MUTATION, {
         variables: { id: id }
     })
-    return <button type="button">Add</button>
+    return <button 
+        disabled={loading}
+        type="button" 
+        onClick={addToCart}>
+            Add{loading && 'ing'}
+    </button>
     
 }
