@@ -3,6 +3,7 @@ import NavStyles from '../components/styles/NavStyles';
 import { useUser } from './User';
 import { useCart } from '../lib/cartState';
 import SignOut from '../components/SignOut';
+import CartCount from '../components/CartCount';
 
 
 export default function Nav() {
@@ -21,7 +22,10 @@ export default function Nav() {
                         <Link href="/account">Account</Link>
                         {/* <Link href="/cart">Cart</Link> */}
                         <SignOut />
-                <button type="button" onClick={openCart}>🛒</button>
+                <button type="button" onClick={openCart}>
+                    🛒
+                    <CartCount count={12}/>
+                </button>
             </> )}
             {/* if not signed in */}
             { !user && ( <>
