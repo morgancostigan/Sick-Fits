@@ -24,7 +24,9 @@ export default function Nav() {
                         <SignOut />
                 <button type="button" onClick={openCart}>
                     🛒
-                    <CartCount count={12}/>
+                    <CartCount count={user.cart.reduce(
+                        (tally, cartItem) => tally + cartItem.quantity, 0)}
+                    />
                 </button>
             </> )}
             {/* if not signed in */}
