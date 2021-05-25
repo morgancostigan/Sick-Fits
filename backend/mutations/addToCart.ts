@@ -17,6 +17,8 @@ export default async function addToCart(
     const allCartItems = await context.lists.CartItem.findMany({
         where: {user: {id: sesh.itemId}, product: {id: productID}}
     });
+    console.log({allCartItems});
+    
     const [existingCartItem] = allCartItems;
     // see if item being added is already in cart
     // if yes, increment. 
@@ -33,7 +35,7 @@ export default async function addToCart(
     // if no, create new CartItem
     return await context.lists.CartItem.createOne({
         data: {
-            product: { connect: { id: productId }},
+            product: { connect: { id: productID }},
             user: { connect: { id: sesh.itemId }},
         }
     })
