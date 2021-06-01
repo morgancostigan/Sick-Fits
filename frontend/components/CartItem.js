@@ -8,7 +8,7 @@ const CartItemStyles = styled.li`
     padding: 1rem 0;
     border-bottom: 1px solid var(--lightGrey);
     display: grid;
-    grid-template-columns: : auto 1fr auto;
+    grid-template-columns: auto 1fr auto;
     img {
         width: 100px;
         margin-right: 1rem;
@@ -28,7 +28,6 @@ export default function CartItem({cartItem}) {
             <img src={pic} alt={cartItem.name}/>
             <div>
                 <h3>{product.name}</h3>
-                <RemoveFromCart />
 
                 <p>
                     {formatMoney(product.price * cartItem.quantity)} subtotal
@@ -37,6 +36,7 @@ export default function CartItem({cartItem}) {
                     <em>{cartItem.quantity} &times; {formatMoney(product.price)} each</em>
                 </p>
             </div>
+            <RemoveFromCart id={cartItem.id} />
 
         </CartItemStyles>
     )

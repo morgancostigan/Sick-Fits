@@ -5,11 +5,9 @@ const RemoveButton = styled.button`
   color: black;
   font-size: 2rem;
   border: 0;
-  position: absolute;
-  z-index: 2;
-  right: 0;
+
   &:hover{
-    background: var(--red);
+    color: var(--red);
     cursor: pointer;
   }
 `;
