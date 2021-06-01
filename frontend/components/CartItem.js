@@ -26,8 +26,9 @@ export default function CartItem({cartItem}) {
         <CartItemStyles>
             <img src={pic} alt={cartItem.name}/>
             <div>
-                <RemoveButton>&times;</RemoveButton>
                 <h3>{product.name}</h3>
+                <RemoveButton>&times;</RemoveButton>
+
                 <p>
                     {formatMoney(product.price * cartItem.quantity)} subtotal
                 </p>
