@@ -15,6 +15,11 @@ export default function RemoveFromCart({ id }) {
         REMOVE_FROM_CART_MUTATION, 
         {variables: {id: id}}
         )
-    return <RemoveButton type="button" title="remove this item from cart">
+    return <RemoveButton 
+        onClick={removeFromCart}
+        disabled={loading}
+        aria-busy={loading}
+        type="button" 
+        title="remove this item from cart">
         &times;</RemoveButton>
 }
