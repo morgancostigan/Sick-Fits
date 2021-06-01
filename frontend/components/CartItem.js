@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import formatMoney from "../lib/formatMoney";
 import RemoveButton from './styles/RemoveButton';
+import RemoveFromCart from './RemoveFromCart';
 
 
 const CartItemStyles = styled.li`
@@ -27,7 +28,7 @@ export default function CartItem({cartItem}) {
             <img src={pic} alt={cartItem.name}/>
             <div>
                 <h3>{product.name}</h3>
-                <RemoveButton>&times;</RemoveButton>
+                <RemoveFromCart />
 
                 <p>
                     {formatMoney(product.price * cartItem.quantity)} subtotal
