@@ -1,1 +1,0 @@
-{"ast":null,"code":"export { default } from './pro';","map":{"version":3,"sources":["/Users/macbookpro/Documents/Tier-4/Advanced-React-master redux/sick-fits/frontend/pages/index.js"],"names":["default"],"mappings":"AAAA,SAAQA,OAAR,QAAsB,OAAtB","sourcesContent":["export {default} from './pro'"]},"metadata":{},"sourceType":"module"}

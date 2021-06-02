@@ -20,7 +20,14 @@ export default function RemoveFromCart({ id }) {
         REMOVE_FROM_CART_MUTATION, {
             variables: {id},
             //named simply update, because updateCart didn't work.  is this an apollo thing?
-            update
+            update,
+            // optimistic response breaks the app for now.
+            // optimisticResponse: {
+            //     deleteCartItem: {
+            //         __typename: 'CartItem',
+            //         id,
+            //     },
+            // },
     });
     return <RemoveButton 
         onClick={removeFromCart}
