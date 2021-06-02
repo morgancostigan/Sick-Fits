@@ -1,16 +1,31 @@
+import { useCombobox } from 'downshift';
 import { DropDownItem, DropDown, SearchStyles } from './styles/DropDown';
 
 export default function Search() {
-    return <SearchStyles>
-        <div>
-            <input type="search"/>
-        </div>
-        <DropDown>
-            <DropDownItem>Hey</DropDownItem>
-            <DropDownItem>Yo</DropDownItem>
-            <DropDownItem>Sup</DropDownItem>
-            <DropDownItem>Kia Ora</DropDownItem>
-            <DropDownItem>Que Pasa</DropDownItem>
-        </DropDown>
-    </SearchStyles>
-}
+    const { getMenuProps, getInputProps, getComboboxProps } = useCombobox({
+        items: [],
+        onInputValueChange(){
+            console.log('Chngd');
+        },
+        onSelectedItemChange(){
+            console.log('Slctd itm chngd');
+            
+        } 
+    });
+    
+    return (
+        <SearchStyles>
+            <div {...getComboboxProps()}>
+                <input {...getInputProps({
+                    type: 'search',
+                    placeholder: 'Search for an item.',
+                    id: 'search',
+                    className: 'loading',
+                })} />
+            </div>
+            <DropDown>
+                <DropDownItem>Hey</DropDownItem>
+            </DropDown>
+        </SearchStyles>
+    );
+};

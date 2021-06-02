@@ -7,5 +7,6 @@ Sick Fits Frontend
 # Apollo Upload Client
 # Styled Components
 # NProgress
+# downshift (for search result keyboard functionality)
 
 

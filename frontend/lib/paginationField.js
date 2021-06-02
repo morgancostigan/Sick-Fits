@@ -25,7 +25,7 @@ export default function paginationField() {
             };
             //if there are items in cache, skip the network request and return from cache
             if(items.length) {
-                console.log(`the cache already has ${items.length} items`);
+                // console.log(`the cache already has ${items.length} items`);
                 return items;  
             };
             // if both IFs don't work... fall back to network request
@@ -40,7 +40,7 @@ export default function paginationField() {
             //grab skip and first values
             const { skip, first } = args;
             // this runs when Apollo brings data back from the network request
-            console.log(`merging items from network ${incoming.length}`);
+            // console.log(`merging items from network ${incoming.length}`);
             // console.log({incoming});
             //if anything in the cache, merged is the existing, otherwise it's an empty array
             const merged = existing ? existing.slice(0) : [];
