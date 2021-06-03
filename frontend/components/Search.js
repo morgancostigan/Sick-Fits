@@ -67,9 +67,9 @@ export default function Search() {
                 pathname: `/product/${selectedItem.id}`
             })
             // console.log('Slctd itm chngd');
-            // console.log({selectedItem});
-                        
-        } 
+            // console.log({selectedItem});           
+        }, 
+        itemToString: (item) => item?.name || '',
     });
     
     return (
