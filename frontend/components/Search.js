@@ -1,6 +1,7 @@
 import { useLazyQuery } from '@apollo/client';
 import { resetIdCounter, useCombobox } from 'downshift';
 import gql from 'graphql-tag';
+import debounce from 'lodash.debounce';
 import { DropDownItem, DropDown, SearchStyles } from './styles/DropDown';
 
 const SEARCH_PRODUCTS_QUERY = gql`
@@ -33,11 +34,20 @@ export default function Search() {
             //bypass the cache in favor of network searching
             fetchPolicy: 'no-cache',
         });
+    const items = data?.searchTerms || []; 
+        
+    //this is a debounced function that only fires periodically
+    const findItemsButChill = debounce(findItems, 350)
     resetIdCounter();
-    const { getMenuProps, getInputProps, getComboboxProps } = useCombobox({
+    const { inputValue, getMenuProps, getInputProps, getComboboxProps } =  useCombobox({
         items: [],
         onInputValueChange(){
             console.log('Chngd');
+            findItemsButChill({
+                variables: {
+                     searchTerm: inputValue,
+                }
+            });
         },
         onSelectedItemChange(){
             console.log('Slctd itm chngd');
@@ -56,10 +66,7 @@ export default function Search() {
                 })} />
             </div>
             <DropDown {...getMenuProps()}>
-                <DropDownItem>Hey</DropDownItem>
-                <DropDownItem>yo</DropDownItem>
-                <DropDownItem>sup</DropDownItem>
-
+                {items.map(item => <DropDownItem>{item.name}</DropDownItem>)}
             </DropDown>
         </SearchStyles>
     );
