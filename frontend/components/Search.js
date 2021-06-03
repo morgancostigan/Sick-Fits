@@ -41,8 +41,15 @@ export default function Search() {
     //this is a debounced function that only fires periodically
     const findItemsButChill = debounce(findItems, 350)
     resetIdCounter();
-    const { inputValue, getMenuProps, getInputProps, getComboboxProps } =  useCombobox({
-        items: [],
+    const { 
+        inputValue, 
+        getMenuProps, 
+        getInputProps, 
+        getComboboxProps,
+        getItemProps, 
+        highlightedIndex,
+    } =  useCombobox({
+        items,
         onInputValueChange(){
             console.log('Chngd');
             findItemsButChill({
@@ -68,8 +75,12 @@ export default function Search() {
                 })} />
             </div>
             <DropDown {...getMenuProps()}>
-                {items.map(item => 
-                <DropDownItem>
+                {items.map((item, index) => 
+                    <DropDownItem 
+                        key={item.id} 
+                        {...getItemProps({item})}
+                        highlighted={index === highlightedIndex}
+                    >
                     <img 
                         src={item.photo.image.publicUrlTransformed} 
                         alt={item.description}
