@@ -34,6 +34,8 @@ export default function Search() {
             //bypass the cache in favor of network searching
             fetchPolicy: 'no-cache',
         });
+    console.log({data});
+    
     const items = data?.searchTerms || []; 
         
     //this is a debounced function that only fires periodically
@@ -62,11 +64,19 @@ export default function Search() {
                     type: 'search',
                     placeholder: 'Search for an item.',
                     id: 'search',
-                    className: 'loading',
+                    className: loading ? 'loading' : '',
                 })} />
             </div>
             <DropDown {...getMenuProps()}>
-                {items.map(item => <DropDownItem>{item.name}</DropDownItem>)}
+                {items.map(item => 
+                <DropDownItem>
+                    <img 
+                        src={item.photo.image.publicUrlTransformed} 
+                        alt={item.description}
+                        width='50px'
+                    />
+                    {item.name}
+                </DropDownItem>)}
             </DropDown>
         </SearchStyles>
     );
