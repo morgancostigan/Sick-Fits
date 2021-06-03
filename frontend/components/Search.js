@@ -43,6 +43,7 @@ export default function Search() {
     resetIdCounter();
     const { 
         inputValue, 
+        isOpen,
         getMenuProps, 
         getInputProps, 
         getComboboxProps,
@@ -75,7 +76,7 @@ export default function Search() {
                 })} />
             </div>
             <DropDown {...getMenuProps()}>
-                {items.map((item, index) => 
+                {isOpen && items.map((item, index) =>
                     <DropDownItem 
                         key={item.id} 
                         {...getItemProps({item})}
@@ -88,6 +89,9 @@ export default function Search() {
                     />
                     {item.name}
                 </DropDownItem>)}
+                {isOpen && !items.length && !loading && (
+                    <DropDownItem>No Results For That</DropDownItem>
+                )}
             </DropDown>
         </SearchStyles>
     );
