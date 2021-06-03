@@ -2,6 +2,7 @@ import { useLazyQuery } from '@apollo/client';
 import { resetIdCounter, useCombobox } from 'downshift';
 import gql from 'graphql-tag';
 import debounce from 'lodash.debounce';
+import { useRouter } from 'next/router';
 import { DropDownItem, DropDown, SearchStyles } from './styles/DropDown';
 
 const SEARCH_PRODUCTS_QUERY = gql`
@@ -28,6 +29,7 @@ const SEARCH_PRODUCTS_QUERY = gql`
 `;
 
 export default function Search() {
+    const router = useRouter();
     const [findItems, { loading, data, error }] = useLazyQuery(
         SEARCH_PRODUCTS_QUERY,
         {
@@ -49,6 +51,7 @@ export default function Search() {
         getComboboxProps,
         getItemProps, 
         highlightedIndex,
+        selectedItem,
     } =  useCombobox({
         items,
         onInputValueChange(){
@@ -59,9 +62,13 @@ export default function Search() {
                 }
             });
         },
-        onSelectedItemChange(){
-            console.log('Slctd itm chngd');
-            
+        onSelectedItemChange({ selectedItem }){
+            router.push({
+                pathname: `/product/${selectedItem.id}`
+            })
+            // console.log('Slctd itm chngd');
+            // console.log({selectedItem});
+                        
         } 
     });
     
@@ -90,7 +97,7 @@ export default function Search() {
                     {item.name}
                 </DropDownItem>)}
                 {isOpen && !items.length && !loading && (
-                    <DropDownItem>No Results For That</DropDownItem>
+                    <DropDownItem>Oh Snap! No Results For {inputValue}</DropDownItem>
                 )}
             </DropDown>
         </SearchStyles>
